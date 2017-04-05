@@ -24,6 +24,19 @@
       }, this);
     },
 
+    columns: function() {
+      var rows = this.rows();
+      var columns = [];
+      for ( var x = 0; x < rows.length; x++) {
+        var column = [];
+        for (var y = 0; y < rows[x].length; y++) {
+          column.push(rows[y][x]);
+        }
+        columns.push(column);
+      }
+      debugger;
+    },
+
     togglePiece: function(rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
       this.trigger('change');
@@ -79,12 +92,17 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var specificRow = this.rows()[rowIndex];
+      return (specificRow.reduce((sum, currentVal) => sum + currentVal) > 1) ? true : false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var rows = this.rows();
+      var context = this;
+      return rows.some(function(row, index) {
+        return context.hasRowConflictAt(index);
+      });
     },
 
 
@@ -94,6 +112,7 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      var columns = this.columns();
       return false; // fixme
     },
 
