@@ -73,7 +73,6 @@
     */
 
     _getFirstRowColumnIndexForMajorDiagonalOn: function(rowIndex, colIndex) {
-      // console.log(colIndex+' - '+rowIndex+' =  '+(colIndex - rowIndex) )
       return colIndex - rowIndex;
     },
 
